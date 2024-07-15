@@ -2,20 +2,53 @@ local ts_utils = require("nvim-treesitter.ts_utils")
 
 local M = {}
 
-function M.move_table_cell_up()
+---@return TSNode | nil
+function M.get_table_cell()
 	local node = ts_utils.get_node_at_cursor()
-	if not node or node:type() ~= "cell" then
+	if not node then
+		return nil
+	elseif node:type() == "row" then
+		local cursor = vim.api.nvim_win_get_cursor(0)
+		local child_count = node:child_count()
+		local cell = node:child(child_count - 1)
+		for i = 0, child_count - 2 do
+			local child = node:child(i)
+			local _, start_col = child:start()
+			local _, end_col = child:next_sibling():start()
+			if child:type() == "cell" then
+				if start_col <= cursor[2] and cursor[2] < end_col then
+					cell = child
+					break
+				end
+			else
+				cell = child:prev_sibling()
+			end
+		end
+		return cell
+	elseif node:type() == "cell" then
+		return node
+	elseif node:type() == "contents" then
+		return node:parent()
+	elseif node:type() == "expr" then
+		return node:parent():parent()
+	end
+end
+
+function M.move_table_cell_up()
+	local node = M.get_table_cell()
+	if not node then
 		return
 	end
 
-	local root = node:tree():root()
-	local start_row = node:start()
-	local parent = node:parent()
+	-- local root = node:tree():root()
+	-- local start_row = node:start()
+	-- local parent = node:parent()
 
-	while parent ~= nil and parent ~= root and parent:start() == start_row do
-		node = parent
-		parent = node:parent()
-	end
+	--
+	-- while parent ~= nil and parent ~= root and parent:start() == start_row do
+	-- 	node = parent
+	-- 	parent = node:parent()
+	-- end
 
 	local bufnr = vim.api.nvim_get_current_buf()
 	ts_utils.update_selection(bufnr, node)
