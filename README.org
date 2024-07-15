@@ -51,12 +51,14 @@ no special steps required
 
 **** Move Cell Right
 ~<leader>rth~
+- expected behaviour in last column: will create a new column to the right of the current column and move the cell there
 
 **** Move Column Left
 ~<leader>rtH~
 
 **** Move Column Right
 ~<leader>rtL~
+- expected behaviour in last column: will create a new column to the right of the current column and swap them
 
 **** Move Row Up
 - not implemented
