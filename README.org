@@ -47,10 +47,10 @@ no special steps required
 ~<leader>rtj~
 
 **** Move Cell Left
-~<leader>rtl~
+~<leader>rth~
 
 **** Move Cell Right
-~<leader>rth~
+~<leader>rtl~
 - expected behaviour in last column: will create a new column to the right of the current column and move the cell there
 
 **** Move Column Left
