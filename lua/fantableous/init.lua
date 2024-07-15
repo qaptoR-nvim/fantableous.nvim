@@ -59,4 +59,42 @@ function M.move_table_cell_down()
 	-- ts_utils.update_selection(bufnr, node)
 end
 
+function M.move_table_cell_left()
+	local node = units.get_table_cell()
+	if not node then
+		return
+	end
+
+	local other_node = node:prev_sibling()
+	if not other_node then
+		return
+	end
+
+	local bufnr = vim.api.nvim_get_current_buf()
+	ts_utils.swap_nodes(node, other_node, bufnr, true)
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	vim.cmd("normal gqgq")
+	vim.api.nvim_win_set_cursor(0, cursor)
+	-- ts_utils.update_selection(bufnr, node)
+end
+
+function M.move_table_cell_right()
+	local node = units.get_table_cell()
+	if not node then
+		return
+	end
+
+	local other_node = node:next_sibling()
+	if not other_node then
+		return
+	end
+
+	local bufnr = vim.api.nvim_get_current_buf()
+	ts_utils.swap_nodes(node, other_node, bufnr, true)
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	vim.cmd("normal gqgq")
+	vim.api.nvim_win_set_cursor(0, cursor)
+	-- ts_utils.update_selection(bufnr, node)
+end
+
 return M
