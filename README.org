@@ -41,22 +41,22 @@ no special steps required
 
 *** Manipulating Tables
 **** Move Cell Up
-`<leader>rtk`
+~<leader>rtk~
 
 **** Move Cell Down
-`<leader>rtj`
+~<leader>rtj~
 
 **** Move Cell Left
-`<leader>rtl`
+~<leader>rtl~
 
 **** Move Cell Right
-`<leader>rth`
+~<leader>rth~
 
 **** Move Column Left
-`<leader>rtH`
+~<leader>rtH~
 
 **** Move Column Right
-`<leader>rtL`
+~<leader>rtL~
 
 **** Move Row Up
 - not implemented
