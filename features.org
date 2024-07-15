@@ -1,0 +1,75 @@
+- [ ] org-table-move-cell-down
+- [ ] org-table-move-cell-left
+- [ ] org-table-move-cell-right
+- [ ] org-table-move-cell-up
+
+- [ ] org-table-move-column-left
+- [ ] org-table-move-column-right
+- [ ] org-table-move-row-down
+- [ ] org-table-move-row-up
+
+- [ ] org-table-next-field
+- [ ] org-table-next-row
+
+- [ ] org-table-insert-column-after
+- [ ] org-table-insert-column-before
+- [ ] org-table-insert-hline
+- [ ] org-table-insert-row-above
+- [ ] org-table-insert-row-below
+
+- [ ] org-table-align
+
+- [ ] org-table-create-or-convert-from-region
+- [ ] org-table-create-with-table.el
+
+- [ ] org-table-beginning-of-field
+- [ ] org-table-blank-field
+- [ ] org-table-copy-region
+- [ ] org-table-copy-down
+- [ ] org-table-cut-region
+- [ ] org-table-delete-column
+- [ ] org-table-edit-field
+- [ ] org-table-edit-formulas
+- [ ] org-table-end-of-field
+- [ ] org-table-eval-formula
+
+- [ ] org-table-expand
+- [ ] org-table-export
+- [ ] org-table-import
+
+- [ ] org-table-fedit-abort
+- [ ] org-table-fedit-finish
+- [ ] org-table-fedit-line-down
+- [ ] org-table-fedit-line-up
+- [ ] org-table-fedit-lisp-indent
+- [ ] org-table-fedit-ref-down
+- [ ] org-table-fedit-ref-left
+- [ ] org-table-fedit-ref-right
+- [ ] org-table-fedit-ref-up
+- [ ] org-table-fedit-scroll-down
+- [ ] org-table-fedit-scroll-up
+- [ ] org-table-fedit-toggle-ref-type
+
+- [ ] org-table-field-info
+
+- [ ] org-table-header-line-mode
+- [ ] org-table-hline-and-move
+
+- [ ] org-table-iterate
+- [ ] org-table-iterate-buffer-tables
+- [ ] org-table-kill-row
+- [ ] org-table-paste-rectangle
+- [ ] org-table-previous-field
+
+- [ ] org-table-recalculate
+- [ ] org-table-recalculate-buffer-tables
+
+- [ ] org-table-rotate-recalc-marks
+- [ ] org-table-shrink
+- [ ] org-table-sort-lines
+- [ ] org-table-sum
+- [ ] org-table-toggle-column-width
+- [ ] org-table-toggle-coordinate-overlays
+- [ ] org-table-toggle-formula-debugger
+- [ ] org-table-transpose-table-at-point
+- [ ] org-table-wrap-region
