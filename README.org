@@ -1,7 +1,7 @@
 * fantableous
-fantableous is a markdown style table editor, generator, and spreadsheet engine written in lua and using treesitter. It is designed to be used alongside the neovim plugin 'nvim-orgmode/orgmode', or as a standalone tool.
+fantableous is a markdown style table editor, generator, and spreadsheet engine written in lua and using treesitter. It is designed to be used alongside the neovim plugin ~nvim-orgmode/orgmode~, or as a standalone tool.
 
-Until this plugin reaches feature parity with 'dhruvasagar/vim-table-mode' it is recommended to have that plugin installed as well.
+Until this plugin reaches feature parity with ~dhruvasagar/vim-table-mode~ it is recommended to have that plugin installed as well.
 Conflicting keybinds should not matter since each feature provided is an atomic operation for each plugin. Otherwise you may want to ensure that this plugin is loaded second of the two, so that its keybinds take precedence.
 
 ** Requirements
@@ -18,7 +18,7 @@ Use your favorite plugin manager:
 
 #+BEGIN_SRC lua
 {
- 'qaptoR-nvim/fantableous',
+ 'qaptoR-nvim/fantableous.nvim',
 }
 #+END_SRC
 
