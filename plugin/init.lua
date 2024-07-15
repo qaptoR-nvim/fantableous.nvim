@@ -1,7 +1,9 @@
-vim.keymap.set("", "<leader>rtk", require("fantableous").move_table_cell_up, { noremap = true, silent = true })
-vim.keymap.set("", "<leader>rtj", require("fantableous").move_table_cell_down, { noremap = true, silent = true })
-vim.keymap.set("", "<leader>rth", require("fantableous").move_table_cell_left, { noremap = true, silent = true })
-vim.keymap.set("", "<leader>rtl", require("fantableous").move_table_cell_right, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>rtk", require("fantableous").move_table_cell_up, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>rtj", require("fantableous").move_table_cell_down, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>rth", require("fantableous").move_table_cell_left, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>rtl", require("fantableous").move_table_cell_right, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>rtH", require("fantableous").move_table_col_left, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>rtL", require("fantableous").move_table_col_right, { noremap = true, silent = true })
 
 --
 -- local save_cpo = vim.opt.cpo
