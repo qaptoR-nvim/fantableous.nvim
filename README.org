@@ -63,14 +63,14 @@ no special steps required
 **** Move Row Up
 - not implemented
 - suggest creating keybinds:
-  - { '<A-k>', '<cmd>m .-2<cr>==', desc = 'move line up' },
-  - { '<A-S-k>', '<cmd>m .-2<cr>gqgq', desc = 'move line up' },
+  - ~{ '<A-k>', '<cmd>m .-2<cr>==', desc = 'move line up' }~,
+  - ~{ '<A-S-k>', '<cmd>m .-2<cr>gqgq', desc = 'move line up' }~,
 
 **** Move Row Down
 - not implemented
 - suggest creating keybind:
-  - { '<A-j>', '<cmd>m .+1<cr>==', desc = 'move line down' },
-  - { '<A-S-j>', '<cmd>m .+1<cr>gqgq', desc = 'move line down' },
+  - ~{ '<A-j>', '<cmd>m .+1<cr>==', desc = 'move line down' }~,
+  - ~{ '<A-S-j>', '<cmd>m .+1<cr>gqgq', desc = 'move line down' }~,
 
 **** Delete Row
 - todo
