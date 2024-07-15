@@ -4,9 +4,11 @@ fantableous is a markdown style table editor, generator, and spreadsheet engine 
 Until this plugin reaches feature parity with 'dhruvasagar/vim-table-mode' it is recommended to have that plugin installed as well.
 Conflicting keybinds should not matter since each feature provided is an atomic operation for each plugin. Otherwise you may want to ensure that this plugin is loaded second of the two, so that its keybinds take precedence.
 
-** Installation
+** Requirements
 
 - Neovim 0.10.0 or later
+- treesitter
+- optional: vim-table-mode
 
 ** Installation
 
@@ -24,84 +26,85 @@ Use your favorite plugin manager:
 
 
 ** Setup
+no special steps required
 
 ** Usage
 *** Creating a Table on the Fly
-todo
-see vim-table-mode for current implementation
+- todo
+- see vim-table-mode for current implementation
 
 
 *** Moving Around
-todo
-see vim-table-mode for current implementation
+- todo
+- see vim-table-mode for current implementation
 
 
 *** Manipulating Tables
 **** Move Cell Up
-<leader>rtk
+`<leader>rtk`
 
 **** Move Cell Down
-<leader>rtj
+`<leader>rtj`
 
 **** Move Cell Left
-<leader>rtl
+`<leader>rtl`
 
 **** Move Cell Right
-<leader>rth
+`<leader>rth`
 
 **** Move Column Left
-<leader>rtH
+`<leader>rtH`
 
 **** Move Column Right
-<leader>rtL
+`<leader>rtL`
 
 **** Move Row Up
-not implemented
-suggest creating keybinds:
-    { '<A-k>', '<cmd>m .-2<cr>==', desc = 'move line up' },
-    { '<A-S-k>', '<cmd>m .-2<cr>gqgq', desc = 'move line up' },
+- not implemented
+- suggest creating keybinds:
+  - { '<A-k>', '<cmd>m .-2<cr>==', desc = 'move line up' },
+  - { '<A-S-k>', '<cmd>m .-2<cr>gqgq', desc = 'move line up' },
 
 **** Move Row Down
-not implemented
-suggest creating keybind:
-    { '<A-j>', '<cmd>m .+1<cr>==', desc = 'move line down' },
-    { '<A-S-j>', '<cmd>m .+1<cr>gqgq', desc = 'move line down' },
+- not implemented
+- suggest creating keybind:
+  - { '<A-j>', '<cmd>m .+1<cr>==', desc = 'move line down' },
+  - { '<A-S-j>', '<cmd>m .+1<cr>gqgq', desc = 'move line down' },
 
 **** Delete Row
-todo
-see vim-table-mode for current implementation
+- todo
+- see vim-table-mode for current implementation
 
 **** Delete Column
-todo
-see vim-table-mode for current implementation
+- todo
+- see vim-table-mode for current implementation
 
 **** Insert Row Above
-todo
-see vim-table-mode for current implementation
+- todo
+- see vim-table-mode for current implementation
 
 **** Insert Row Below
-todo
-see vim-table-mode for current implementation
+- todo
+- see vim-table-mode for current implementation
 
 **** Insert Column Before
-todo
-see vim-table-mode for current implementation
+- todo
+- see vim-table-mode for current implementation
 
 **** Insert Column After
-todo
-see vim-table-mode for current implementation
+- todo
+- see vim-table-mode for current implementation
 
 
 *** Highlight Rows, Cells Based on Content
-todo
-see vim-table-mode for current implementation
+- todo
+- see vim-table-mode for current implementation
 
 ** Advanced Usage
 *** Table Formulas
-todo
-see vim-table-mode for current implementation
+- todo
+- see vim-table-mode for current implementation
 
 *** Formula Expressions 
-todo
-see vim-table-mode for current implementation
+- todo
+- see vim-table-mode for current implementation
 
