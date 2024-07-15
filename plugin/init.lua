@@ -1,4 +1,5 @@
-vim.keymap.set("", "<leader>rt", require("fantableous").move_table_cell_up, { noremap = true, silent = true })
+vim.keymap.set("", "<leader>rtk", require("fantableous").move_table_cell_up, { noremap = true, silent = true })
+vim.keymap.set("", "<leader>rtj", require("fantableous").move_table_cell_down, { noremap = true, silent = true })
 
 --
 -- local save_cpo = vim.opt.cpo
