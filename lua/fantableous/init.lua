@@ -1,6 +1,19 @@
 local units = require('fantableous.units')
+local config = require('fantableous.config')
 
 local M = {}
+
+function M.setup(user_opts)
+  config.setup(user_opts)
+end
+
+function node_to_lsp_range(node)
+  local sr, sc, er, ec = node:range()
+  return {
+    start = { line = sr, character = sc },
+    ['end'] = { line = er, character = ec },
+  }
+end
 
 --- Swaps the text of two Tree-sitter nodes in a buffer.
 ---@param node_a TSNode The first node to swap
@@ -13,51 +26,46 @@ local function swap_nodes(node_a, node_b, bufnr, cursor_to_second)
     return
   end
 
-  -- 1. Grab the text of both nodes before making changes
   local text_a = vim.treesitter.get_node_text(node_a, bufnr)
   local text_b = vim.treesitter.get_node_text(node_b, bufnr)
 
-  -- 2. Get coordinates (start_row, start_col, end_row, end_col)
-  local sr_a, sc_a, er_a, ec_a = node_a:range()
-  local sr_b, sc_b, er_b, ec_b = node_b:range()
+  local range_a = node_to_lsp_range(node_a)
+  local range_b = node_to_lsp_range(node_b)
 
-  -- 3. Determine which node is positioned further down the buffer
-  local first_node, second_node
-  local first_text, second_text
+  local edit_a = { range = range_a, newText = text_b }
+  local edit_b = { range = range_b, newText = text_a }
 
-  if sr_a < sr_b or (sr_a == sr_b and sc_a < sc_b) then
-    -- node_a comes before node_b
-    first_node = { sr_a, sc_a, er_a, ec_a }
-    second_node = { sr_b, sc_b, er_b, ec_b }
-    first_text = text_b -- node_a will get node_b's text
-    second_text = text_a -- node_b will get node_a's text
-  else
-    -- node_b comes before node_a
-    first_node = { sr_b, sc_b, er_b, ec_b }
-    second_node = { sr_a, sc_a, er_a, ec_a }
-    first_text = text_a
-    second_text = text_b
+  bufnr = bufnr == 0 and vim.api.nvim_get_current_buf() or bufnr
+  vim.lsp.util.apply_text_edits({ edit_a, edit_b }, bufnr, 'utf-8')
+
+  text_a = vim.split(text_a, '\n', { plain = true })
+  text_b = vim.split(text_b, '\n', { plain = true })
+
+  if cursor_to_second then
+    local cdelta = 0
+    local rdelta = 0
+
+    local flag = (range_a['end'].line == range_b.start.line and range_a['end'].character <= range_b.start.character)
+    if range_a['end'].line < range_b.start.line or flag then
+      rdelta = #text_b - #text_a
+    end
+
+    if flag then
+      if rdelta ~= 0 then
+        cdelta = #text_b[#text_b] - range_a['end'].character
+        if range_a.start.line == range_b.start.line + rdelta then
+          cdelta = cdelta + range_a.start.character
+        end
+      else
+        cdelta = #text_b[#text_b] - #text_a[#text_a]
+      end
+    end
+
+    local win = vim.api.nvim_get_current_win()
+    local target_row = range_b.start.line + 1 + rdelta
+    local target_col = range_b.start.character + cdelta
+    vim.api.nvim_win_set_cursor(win, { target_row, target_col })
   end
-
-  -- 4. Execute the replacement
-  -- IMPORTANT: Modify the second node first so we don't mess up its row/col offsets!
-  vim.api.nvim_buf_set_text(
-    bufnr,
-    second_node[1],
-    second_node[2],
-    second_node[3],
-    second_node[4],
-    vim.split(second_text, '\n')
-  )
-
-  vim.api.nvim_buf_set_text(
-    bufnr,
-    first_node[1],
-    first_node[2],
-    first_node[3],
-    first_node[4],
-    vim.split(first_text, '\n')
-  )
 end
 
 function M.move_table_cell_up()
@@ -81,7 +89,7 @@ function M.move_table_cell_up()
   end
 
   local bufnr = vim.api.nvim_get_current_buf()
-  swap_nodes(node, other_node, bufnr, true)
+  swap_nodes(node, other_node, bufnr, config.options.move_cursor_on_swap)
   local cursor = vim.api.nvim_win_get_cursor(0)
   vim.cmd('normal gqgq')
   vim.api.nvim_win_set_cursor(0, cursor)
@@ -109,7 +117,7 @@ function M.move_table_cell_down()
   end
 
   local bufnr = vim.api.nvim_get_current_buf()
-  swap_nodes(node, other_node, bufnr, true)
+  swap_nodes(node, other_node, bufnr, config.options.move_cursor_on_swap)
   local cursor = vim.api.nvim_win_get_cursor(0)
   vim.cmd('normal gqgq')
   vim.api.nvim_win_set_cursor(0, cursor)
@@ -128,7 +136,7 @@ function M.move_table_cell_left()
   end
 
   local bufnr = vim.api.nvim_get_current_buf()
-  swap_nodes(node, other_node, bufnr, true)
+  swap_nodes(node, other_node, bufnr, config.options.move_cursor_on_swap)
   local cursor = vim.api.nvim_win_get_cursor(0)
   vim.cmd('normal gqgq')
   vim.api.nvim_win_set_cursor(0, cursor)
@@ -147,7 +155,7 @@ function M.move_table_cell_right()
   end
 
   local bufnr = vim.api.nvim_get_current_buf()
-  swap_nodes(node, other_node, bufnr, true)
+  swap_nodes(node, other_node, bufnr, config.options.move_cursor_on_swap)
   local cursor = vim.api.nvim_win_get_cursor(0)
   vim.cmd('normal gqgq')
   vim.api.nvim_win_set_cursor(0, cursor)
@@ -186,7 +194,7 @@ function M.move_table_col_left()
       if not other_node then
         return
       end
-      swap_nodes(col_node, other_node, bufnr, true)
+      swap_nodes(col_node, other_node, bufnr, config.options.move_cursor_on_swap)
     end
   end
 
@@ -228,7 +236,7 @@ function M.move_table_col_right()
       if not other_node then
         return
       end
-      swap_nodes(col_node, other_node, bufnr, true)
+      swap_nodes(col_node, other_node, bufnr, config.options.move_cursor_on_swap)
     end
   end
 
